@@ -32,41 +32,71 @@ function Upload() {
     const profilePicUrl = `https://ipfs.io/ipfs/***NFT-IMAGE-INFO**/${nftNumber.toString()}.png`;
   
     const htmlContent = `
-      <html>
-        <head>
-          <title>Face Fable</title>
-          <style>
+    <html>
+    <head>
+        <title>Profile Page</title>
+        <style>
             body {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
             }
-            img {
-              max-width: 100%;
-              height: auto;
-              aspect-ratio: 4/5;
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .profile-card {
+                background: linear-gradient(to bottom right, #fff, #f2f2f2);
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                overflow: hidden;
+                width: 80%;
+                max-width: 800px;
+                display: flex;
+                flex-direction: row;
+            }
+            .profile-photo {
+                flex: 1;
+                max-width: 600px;
+            }
+            .profile-photo img {
+                border-radius: 5px 0 0 5px;
+                width: 100%;
+                max-width: 600px;
+                height: auto;
+            }
+            .profile-info {
+                flex: 2;
+                padding: 20px;
+            }
+            .name {
+                font-size: 36px;
+                color: #333;
             }
             .bio {
-              margin-top: 2rem;
-              width: 80%;
-              max-width: 600px;
-              border-radius: 5px;
-              padding: 1rem;
-              background-color: #f0f0f0;
-              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin-top: 20px;
+                font-size: 16px;
+                color: #555;
             }
-          </style>
-        </head>
-        <body>
-          <img src="${profilePicUrl}" alt="Profile Picture">
-          <div class="bio">
-            <h2>${name}</h2>
-            <p>${bio}</p>
-          </div>
-        </body>
-      </html>
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-photo">
+                    <img src="${profilePicUrl}" alt="Profile Picture">
+                </div>
+                <div class="profile-info">
+                    <div class="name">${name}</div>
+                    <div class="bio">${bio}</div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
     `;
   
     const htmlFile = new File([htmlContent], "index.html", {type : 'text/html'});
