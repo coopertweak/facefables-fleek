@@ -64,7 +64,7 @@ function Upload() {
       </html>
     `;
   
-    const htmlFile = new File([htmlContent], "profile.html", {type : 'text/html'});
+    const htmlFile = new File([htmlContent], "index.html", {type : 'text/html'});
   
     try {
       setIsLoading(true);
