@@ -10,9 +10,12 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #1b62c5;
-  font-family: "Inter", sans-serif;
+  color: #444547;
+  font-family: "Inter", ;
   font-style: normal;
+  margin-top:  100px;
+  margin-bottom: 100px;
+
 }
 
 .button-con {
@@ -20,7 +23,7 @@
 }
 
 .button-53 {
-  background-color: #3dd1e7;
+  background-color: #ffc400;
   border: 0 solid #e5e7eb;
   box-sizing: border-box;
   color: #000000;
