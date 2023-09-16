@@ -8,6 +8,7 @@ function Upload() {
   const [dynamicLink, setDynamicLink] = useState("");
   const [nftNumber, setNftNumber] = useState<number | null>(null);
   const [bio, setBio] = useState("");
+  const [name, setName] = useState("");
 
   const handleNftNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const enteredNumber = event.target.value ? parseInt(event.target.value) : null;
@@ -18,9 +19,13 @@ function Upload() {
     setBio(event.target.value);
   };
 
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   const handleUpload = async () => {
-    if (!nftNumber || !bio) {
-      alert("Please enter an NFT number and biography");
+    if (!nftNumber || !bio || !name) {
+      alert("Please enter an NFT number, name and biography");
       return;
     }
   
@@ -57,7 +62,7 @@ function Upload() {
         <body>
           <img src="${profilePicUrl}" alt="Profile Picture">
           <div class="bio">
-            <h2>Biography</h2>
+            <h2>${name}</h2>
             <p>${bio}</p>
           </div>
         </body>
@@ -104,6 +109,10 @@ function Upload() {
                     className="w-full h-full"
                   />
                 </label>
+                <div>
+                  <label htmlFor="name">Name:</label>
+                  <input id="name" onChange={handleNameChange} />
+                </div>
                 <div>
                   <label htmlFor="bio">Biography:</label>
                   <textarea id="bio" onChange={handleBioChange}></textarea>
