@@ -131,16 +131,7 @@ function Upload() {
                     href={uploadLink}
                     target="__blank"
                   >
-                    {uploadLink}
-                  </a>
-                )}
-                {dynamicLink && (
-                  <a
-                    className="text-sm mt-4 -rotate-2"
-                    href={`https://${dynamicLink}`}
-                    target="__blank"
-                  >
-                    {dynamicLink}
+                    VIEW UPLOAD
                   </a>
                 )}
               </div>
