@@ -29,7 +29,7 @@ function Upload() {
       return;
     }
   
-    const profilePicUrl = `https://ipfs.io/ipfs/bafybeig4wbzss3rqa35epeiq54ibax5u7mfakswgweasgeqjnw7az5h7ou/${nftNumber.toString()}.png`;
+    const profilePicUrl = `https://ipfs.io/ipfs/***NFT-IMAGE-INFO**/${nftNumber.toString()}.png`;
   
     const htmlContent = `
       <html>
