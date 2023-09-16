@@ -34,7 +34,7 @@ function Upload() {
     const htmlContent = `
       <html>
         <head>
-          <title>User Profile</title>
+          <title>Face Fable</title>
           <style>
             body {
               display: flex;
@@ -88,6 +88,11 @@ function Upload() {
     }
   };
 
+  const reformatLink = (link: string) => {
+    const hash = link.split('//')[1].split('.')[0];
+    return `ipfs://${hash}`;
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -95,7 +100,7 @@ function Upload() {
           <>Uploading...</>
         ) : (
           <>
-            <p>Upload Content to IPFS</p>
+            <p>Face Fables</p>
             <div className="flex gap-32">
               <div className="">
                 <label className="button-con button-53" htmlFor="nftNumber">
@@ -110,7 +115,7 @@ function Upload() {
                   />
                 </label>
                 <div>
-                  <label htmlFor="name">Name:</label>
+                  <label htmlFor="name">Name your NFT:</label>
                   <input id="name" onChange={handleNameChange} />
                 </div>
                 <div>
@@ -132,6 +137,16 @@ function Upload() {
                     target="__blank"
                   >
                     VIEW UPLOAD
+                  </a>
+                )}
+                {uploadLink && (
+                  <a
+                    className="text-sm mt-4 -rotate-2"
+                    href={reformatLink(uploadLink)}
+                    target="__blank"
+                  >
+                    <b>Copy this link to your subdomain content hash in the ENS app : <br></br></b>
+                    {reformatLink(uploadLink)}
                   </a>
                 )}
               </div>
