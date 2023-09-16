@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import logo from "./logo.svg";
 import { upload } from "@spheron/browser-upload";
 import "./Upload.css";
 
@@ -31,10 +30,36 @@ function Upload() {
       <html>
         <head>
           <title>User Profile</title>
+          <style>
+            body {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              font-family: Arial, sans-serif;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+              aspect-ratio: 4/5;
+            }
+            .bio {
+              margin-top: 2rem;
+              width: 80%;
+              max-width: 600px;
+              border-radius: 5px;
+              padding: 1rem;
+              background-color: #f0f0f0;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+          </style>
         </head>
         <body>
           <img src="${profilePicUrl}" alt="Profile Picture">
-          <p>${bio}</p>
+          <div class="bio">
+            <h2>Biography</h2>
+            <p>${bio}</p>
+          </div>
         </body>
       </html>
     `;
@@ -61,8 +86,6 @@ function Upload() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-  
         {isLoading ? (
           <>Uploading...</>
         ) : (
