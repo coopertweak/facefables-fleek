@@ -7,12 +7,12 @@ function Upload() {
   const [isLoading, setIsLoading] = useState(false);
   const [uploadLink, setUploadLink] = useState("");
   const [dynamicLink, setDynamicLink] = useState("");
-  const [profilePic, setProfilePic] = useState<File | null>(null);
+  const [nftNumber, setNftNumber] = useState<number | null>(null);
   const [bio, setBio] = useState("");
 
-  const handleProfilePicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files ? event.target.files[0] : null;
-    setProfilePic(selectedFile);
+  const handleNftNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const enteredNumber = event.target.value ? parseInt(event.target.value) : null;
+    setNftNumber(enteredNumber);
   };
   
   const handleBioChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,28 +20,27 @@ function Upload() {
   };
 
   const handleUpload = async () => {
-    if (!profilePic || !bio) {
-      alert("Please enter a profile picture and biography");
+    if (!nftNumber || !bio) {
+      alert("Please enter an NFT number and biography");
       return;
     }
   
-    // Create the HTML content
+    const profilePicUrl = `https://ipfs.io/ipfs/bafybeig4wbzss3rqa35epeiq54ibax5u7mfakswgweasgeqjnw7az5h7ou/${nftNumber.toString().padStart(4, '0')}.png`;
+  
     const htmlContent = `
       <html>
         <head>
           <title>User Profile</title>
         </head>
         <body>
-          <img src="${URL.createObjectURL(profilePic)}" alt="Profile Picture">
+          <img src="${profilePicUrl}" alt="Profile Picture">
           <p>${bio}</p>
         </body>
       </html>
     `;
   
-    // Create a File object representing the HTML file
     const htmlFile = new File([htmlContent], "profile.html", {type : 'text/html'});
   
-    // Upload the HTML file to Spheron
     try {
       setIsLoading(true);
       const response = await fetch("http://localhost:8111/initiate-upload");
@@ -71,20 +70,17 @@ function Upload() {
             <p>Upload Content to IPFS</p>
             <div className="flex gap-32">
               <div className="">
-                <label className="button-con button-53" htmlFor="profilePic">
-                  Select Profile Picture
+                <label className="button-con button-53" htmlFor="nftNumber">
+                  Enter NFT Number
                   <input
-                    id="profilePic"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleProfilePicChange}
+                    id="nftNumber"
+                    type="number"
+                    min="1"
+                    max="9999"
+                    onChange={handleNftNumberChange}
                     className="w-full h-full"
-                    style={{ display: "none" }}
                   />
                 </label>
-                <div className="flex-1 flex items-center pl-4 text-sm -rotate-2">
-                  {profilePic ? profilePic?.name : "No file selected"}
-                </div>
                 <div>
                   <label htmlFor="bio">Biography:</label>
                   <textarea id="bio" onChange={handleBioChange}></textarea>
