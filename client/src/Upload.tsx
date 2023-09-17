@@ -125,66 +125,66 @@ function Upload() {
 
   return (
     <div className="App">
-      <header className="App-header">
+    <header className="App-header">
         {isLoading ? (
-          <>Uploading...</>
+        <div className="uploading-text">Uploading...</div>
         ) : (
-          <>
-            <p>Face Fables</p>
-            <div className="flex gap-32">
-              <div className="">
-                <label className="button-con button-53" htmlFor="nftNumber">
-                  Enter NFT Number
-                  <input
+        <>
+            <p className="title-text">Face Fables :)</p>
+            <div className="flex-container">
+            <div className="input-container">
+                <label className="styled-label" htmlFor="nftNumber">
+                Enter NFT Number
+                <input
                     id="nftNumber"
                     type="number"
                     min="1"
                     max="9999"
                     onChange={handleNftNumberChange}
-                    className="w-full h-full"
-                  />
+                    className="styled-input"
+                />
                 </label>
-                <div>
-                  <label htmlFor="name">Name your NFT:</label>
-                  <input id="name" onChange={handleNameChange} />
+                <div className="name-container">
+                <label className="styled-label" htmlFor="name">Name your NFT:</label>
+                <input id="name" onChange={handleNameChange} className="styled-input" />
                 </div>
-                <div>
-                  <label htmlFor="bio">Biography:</label>
-                  <textarea id="bio" onChange={handleBioChange}></textarea>
+                <div className="bio-container">
+                <label className="styled-label" htmlFor="bio">Biography:</label>
+                <textarea id="bio" onChange={handleBioChange} className="styled-textarea"></textarea>
                 </div>
-              </div>
-              <div className="flex flex-col">
+            </div>
+            <div className="button-container">
                 <button
-                  className="button-con button-53 h-12"
-                  onClick={handleUpload}
+                className="styled-button"
+                onClick={handleUpload}
                 >
-                  Upload
+                Upload
                 </button>
                 {uploadLink && (
-                  <a
-                    className="text-sm mt-4 -rotate-2"
+                <a
+                    className="upload-link"
                     href={uploadLink}
                     target="__blank"
-                  >
+                >
                     VIEW UPLOAD
-                  </a>
+                </a>
                 )}
                 {uploadLink && (
-                  <a
-                    className="text-sm mt-4 -rotate-2"
+                <a
+                    className="upload-link"
                     href={reformatLink(uploadLink)}
                     target="__blank"
-                  >
-                    <b>Copy this link to your subdomain content hash in the ENS app : <br></br></b>
+                >
+                    <b>Copy this link to your subdomain content hash in the ENS app : <br /></b>
                     {reformatLink(uploadLink)}
-                  </a>
+                </a>
                 )}
-              </div>
             </div>
-          </>
+            </div>
+        </>
         )}
-      </header>
-    </div>
+    </header>
+</div>
   );  
 }
 
