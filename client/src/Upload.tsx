@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
-import { upload } from "@spheron/browser-upload";
+import { FleekSdk, ApplicationAccessTokenService } from '@fleekxyz/sdk';
 import "./Upload.css";
+
+const applicationService = new ApplicationAccessTokenService({
+    clientId: '<your-client-id>',
+});
+const fleekSdk = new FleekSdk({ accessTokenService: applicationService });
 
 function Upload() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +34,7 @@ function Upload() {
       return;
     }
   
-    const profilePicUrl = `https://ipfs.io/ipfs/***NFT-IMAGE-INFO**/${nftNumber.toString()}.png`;
+    const profilePicUrl = `https://ipfs.io/ipfs/***NFT-IMAGE-INFO***/${nftNumber.toString()}.png`;
   
     const htmlContent = `
     <html>
@@ -99,18 +104,22 @@ function Upload() {
     </html>
     `;
   
-    const htmlFile = new File([htmlContent], "index.html", {type : 'text/html'});
-  
+    const response = await fetch(profilePicUrl);
+    const blob = await response.blob();
+    const profilePicFile = new File([blob], "profilePic.png", { type: blob.type });
+
+    const htmlFile = new File([htmlContent], "index.html", { type: 'text/html' });
+
+    const files = [
+      { path: profilePicFile.name, content: await profilePicFile.arrayBuffer() },
+      { path: htmlFile.name, content: await htmlFile.arrayBuffer() },
+    ];
+
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:8111/initiate-upload");
-      const responseJson = await response.json();
-      const uploadResult = await upload([htmlFile], {
-        token: responseJson.uploadToken,
-      });
-  
-      setUploadLink(uploadResult.protocolLink);
-      setDynamicLink(uploadResult.dynamicLinks[0]);
+      const uploadResult = await fleekSdk.ipfs().addAll(files);
+      setUploadLink(`ipfs://${uploadResult[0].cid}`);
+      setDynamicLink(`ipfs://${uploadResult[1].cid}`);
     } catch (err) {
       alert(err);
     } finally {
@@ -129,7 +138,7 @@ function Upload() {
         {isLoading ? (
         <div className="uploading-text">Uploading...</div>
         ) : (
-        <>
+            <>
             <p className="title-text">Face Fables :)</p>
             <div className="flex-container">
             <div className="input-container">
@@ -153,33 +162,34 @@ function Upload() {
                 <textarea id="bio" onChange={handleBioChange} className="styled-textarea"></textarea>
                 </div>
             </div>
-            <div className="button-container">
+                        <div className="button-container">
                 <button
                 className="styled-button"
                 onClick={handleUpload}
                 >
                 Upload
                 </button>
-                {uploadLink && (
+                {dynamicLink && (
                 <a
                     className="upload-link"
-                    href={uploadLink}
+                    href={dynamicLink}
                     target="__blank"
                 >
-                    VIEW UPLOAD
+                    VIEW BIOGRAPHY PAGE
                 </a>
                 )}
                 {uploadLink && (
                 <a
                     className="upload-link"
-                    href={reformatLink(uploadLink)}
+                    href={reformatLink(dynamicLink)}
                     target="__blank"
                 >
                     <b>Copy this link to your subdomain content hash in the ENS app : <br /></b>
-                    {reformatLink(uploadLink)}
+                    {reformatLink(dynamicLink)}
                 </a>
                 )}
             </div>
+
             </div>
         </>
         )}
