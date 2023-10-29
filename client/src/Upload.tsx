@@ -3,7 +3,7 @@ import { FleekSdk, ApplicationAccessTokenService } from '@fleekxyz/sdk';
 import "./Upload.css";
 
 const applicationService = new ApplicationAccessTokenService({
-    clientId: '<your-client-id>',
+    clientId: process.env.REACT_APP_CLIENT_ID!,
 });
 const fleekSdk = new FleekSdk({ accessTokenService: applicationService });
 
@@ -34,7 +34,7 @@ function Upload() {
       return;
     }
   
-    const profilePicUrl = `https://ipfs.io/ipfs/***NFT-IMAGE-INFO***/${nftNumber.toString()}.png`;
+    const profilePicUrl = `https://ipfs.io/ipfs/${process.env.REACT_APP_NFT_IMAGE_INFO}/${nftNumber.toString()}.png`;
   
     const htmlContent = `
     <html>
