@@ -5,7 +5,7 @@ This app allows NFT communites to easily create profile/biography pages for User
 
 ## **Setup**
 
-You must first create an .env file in the client directory with:
+You must first create an .env file in with:
 
 REACT_APP_NFT_IMAGE_INFO='your-nft-ipfs-hash'
 
