@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FleekSdk, ApplicationAccessTokenService } from '@fleekxyz/sdk';
 import ReactDOMServer from 'react-dom/server';
 import ProfileCard from './ProfileCard';
-import "./Upload.css";
+import "./App.css";
 
 // Initialize Fleek SDK
 const applicationService = new ApplicationAccessTokenService({
