@@ -12,7 +12,7 @@ const applicationService = new ApplicationAccessTokenService({
 const fleekSdk = new FleekSdk({ accessTokenService: applicationService });
 
 // Upload component
-function Upload() {
+function App() {
     // State hooks
     const [isLoading, setIsLoading] = useState(false);
     const [uploadLink, setUploadLink] = useState("");
@@ -143,4 +143,4 @@ function Upload() {
     );
 }
 
-export default Upload;
+export default App;
